@@ -1,0 +1,11 @@
+# Development tools for code quality and testing
+black==23.7.0
+flake8==7.1.1  # Linting
+mccabe==0.7.0  # Code complexity checking
+pycodestyle==2.12.1  # Style checking
+pyflakes==3.2.0  # Static analysis
+isort==5.12.0  # Import sorting
+mypy==1.5.1  # Type checking
+pytest==7.4.0  # Testing framework
+pytest-cov==4.1.0  # Test coverage
+pre-commit==3.3.3  # Pre-commit hooks
