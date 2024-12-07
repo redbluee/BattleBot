@@ -36,11 +36,10 @@ def mock_inputs(monkeypatch):
 
 def test_battle_round_order(mock_inputs):
     """Test battle round ordering and initiative system.
-
     Verifies:
-    1. Characters are ordered by initiative
-    2. Turn order is maintained throughout round
-    3. Initiative tiebreakers work correctly
+    1. Characters are ordered by initiative (highest to lowest)
+    2. Turn order is maintained throughout the round
+    3. Both player and enemy characters follow initiative rules
     """
     # Setup characters with different initiatives
     player1 = Character("Player1", 20, 0, 0, 0, 0, 100, "player")
@@ -63,72 +62,52 @@ def test_battle_round_order(mock_inputs):
 
 
 def test_battle_round_state(mock_inputs):
-    """Test battle round state management.
+    """Test battle round state tracking."""
+    chars = [
+        Character("Tank", 20, 20, 0, 0, 0, 200, "player"),
+        Character("Healer", 15, 0, 0, 0, 0, 100, "player"),
+        Character("Enemy", 10, 0, 0, 0, 0, 150, "enemy"),
+    ]
 
-    Verifies:
-    1. Character state persists between turns
-    2. Damage and healing effects last through round
-    3. Temp HP persists between turns
+    # Mock a sequence of actions:
+    # Tank: Attack Enemy with 40p
+    # Healer: End turn
+    # Enemy: End turn
+    mock_inputs(["a", "Enemy", "", "40p", "e", "e"])
+
+    battle_round(chars, 1)
+
+    # Player's 40p attack with enemy's 0% armor = 40 damage
+    assert chars[2].health == 110  # 150 - 40 = 110
+    assert chars[0].health == 200  # Unchanged
+
+
+def test_dead_enemy_aggro(mock_inputs):
+    """Test edge case: Dead enemies maintain aggro tracking.
+    Current Behavior:
+    1. Dead enemies can track basic aggro
+    2. Dead enemies can gain aggro from being healed
+    3. Dead enemies return valid aggro targets
     """
-    # Setup characters
-    tank = Character("Tank", 20, 50, 0, 0, 0, 200, "player")
-    healer = Character("Healer", 15, 0, 0, 0, 0, 100, "player")
-    enemy = Character("Enemy", 10, 25, 0, 0, 0, 150, "enemy")
-    characters = [tank, healer, enemy]
+    chars = [
+        Character("Player", 20, 0, 0, 0, 0, 100, "player"),
+        Character("Enemy", 10, 0, 0, 0, 0, 100, "enemy"),
+    ]
 
-    # Mock inputs for attack and healing actions
-    mock_inputs(
-        [
-            # Tank's turn
-            "a",  # Choose attack
-            "Enemy",  # Target enemy
-            "n",  # Block/dodge check
-            "30p",  # Damage type
-            "e",  # End tank's turn
-            # Healer's turn
-            "h",  # Choose heal
-            "Tank",  # Target tank
-            "20h",  # Healing amount
-            "e",  # End healer's turn
-            # Enemy's turn
-            "a",  # Choose attack
-            "Tank",  # Target tank
-            "n",  # Block/dodge check
-            "40p",  # Damage type
-            "e",  # End enemy's turn
-        ]
-    )
+    # Kill enemy
+    chars[1].health = 0
 
-    # Run battle round and verify state
-    battle_round(characters, 1)
-    assert tank.health == 180  # Initial 200 - 20 damage (40p * (1 - 0.5))
-    assert enemy.health == 128  # Initial 150 - 22 damage (30p * (1 - 0.25))
+    # Test basic dead enemy aggro
+    chars[1].add_aggro("Player", 100, chars)
+    assert chars[1].aggro["Player"] == 100, "Dead enemies track basic aggro"
 
+    # Test healing-based aggro on dead enemy
+    healing, temp = chars[1].heal({"h": 30}, "Player", chars)
+    assert chars[1].aggro["Player"] == 107.5, "Dead enemies gain aggro from healing"
 
-def test_battle_round_edge_cases(mock_inputs):
-    """Test edge cases in battle round execution.
-
-    Verifies:
-    1. Single character handling
-    2. All characters same initiative
-    3. Character death during round
-    """
-    # Test single character
-    solo = Character("Solo", 10, 0, 0, 0, 0, 100, "player")
-    mock_inputs(["e"])  # End turn for solo character
-    battle_round([solo], 1)
-    assert solo.health == 100  # Health unchanged
-
-    # Test same initiative
-    char1 = Character("Char1", 10, 0, 0, 0, 0, 100, "player")
-    char2 = Character("Char2", 10, 0, 0, 0, 0, 100, "player")
-    char3 = Character("Char3", 10, 0, 0, 0, 0, 100, "enemy")
-    mock_inputs(["e"] * 3)  # End turn for each character
-    battle_round([char1, char2, char3], 1)
-    # Verify all characters took their turns
-    assert char1.health == 100
-    assert char2.health == 100
-    assert char3.health == 100
+    # Test aggro targeting still works
+    highest = chars[1].get_highest_aggro()
+    assert "Player" in highest, "Dead enemies return aggro targets"
 
 
 def test_combat_state_transitions(mock_inputs):

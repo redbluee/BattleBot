@@ -1,5 +1,31 @@
 import pytest
+
 from Battle import Character, battle_round
+
+
+class MockInput:
+    """Mock input class for testing battle rounds without user interaction."""
+
+    def __init__(self, responses):
+        self.responses = responses
+        self.index = 0
+
+    def __call__(self, prompt=""):
+        if self.index >= len(self.responses):
+            return "e"  # Default to end turn if we run out of responses
+        response = self.responses[self.index]
+        self.index += 1
+        return response
+
+
+@pytest.fixture
+def mock_input(monkeypatch):
+    def configure_mock(responses):
+        mock = MockInput(responses)
+        monkeypatch.setattr("builtins.input", mock)
+        return mock
+
+    return configure_mock
 
 
 def test_dead_character_interactions():
@@ -38,8 +64,7 @@ def test_dead_character_interactions():
         assert "Living" in highest, "Dead enemies return aggro targets"
 
 
-@pytest.mark.skip(reason="Uses battle_round which requires input()")
-def test_round_state_persistence():
+def test_round_state_persistence(mock_input):
     """Test state persistence between battle rounds.
 
     Current Behavior:
@@ -59,6 +84,9 @@ def test_round_state_persistence():
     chars[1].health = 0  # Dead
     if hasattr(chars[1], "aggro"):
         chars[1].add_aggro("Player", 100, chars)
+
+    # Mock the inputs for the battle round
+    mock_input(["e"])  # End turn immediately to check state persistence
 
     # Simulate round transition
     battle_round(chars, 1)
