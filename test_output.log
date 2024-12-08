@@ -1,0 +1,391 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.6, pytest-7.4.0, pluggy-1.5.0 -- C:\Python312\python.exe
+cachedir: .pytest_cache
+hypothesis profile 'default' -> database=DirectoryBasedExampleDatabase(WindowsPath('c:/Users/balle/Desktop/snippets/BattleBot/BattleBot/.hypothesis/examples'))
+rootdir: c:\Users\balle\Desktop\snippets\BattleBot\BattleBot
+plugins: hypothesis-6.122.0, cov-4.1.0
+collecting ... collected 62 items
+
+tests/test_integration.py::test_full_combat_round 
+        tests/test_integration.py::test_full_combat_roundPASSED
+tests/test_integration.py::test_combat_state_management 
+        tests/test_integration.py::test_combat_state_managementPASSED
+tests/test_integration.py::test_input_parsing 
+        tests/test_integration.py::test_input_parsingPASSED
+tests/battle/test_battle_edge_cases.py::test_dead_character_interactions 
+        tests/battle/test_battle_edge_cases.py::test_dead_character_interactionsPASSED
+tests/battle/test_battle_edge_cases.py::test_round_state_persistence 
+        SETUP    F monkeypatch
+        SETUP    F mock_battle_input (fixtures used: monkeypatch)
+        tests/battle/test_battle_edge_cases.py::test_round_state_persistence (fixtures used: mock_battle_input, monkeypatch)Runde: 1
+Player (Initiative: 20) ist an der Reihe. Er hat 25 Leben und 50 temporäre HP
+
+Enemy (Initiative: 10) ist an der Reihe. Er hat 0 Leben und 0 temporäre HP
+Hohe Aggro auf Enemy: Player
+
+PASSED
+        TEARDOWN F mock_battle_input
+        TEARDOWN F monkeypatch
+tests/battle/test_battle_edge_cases.py::test_initiative_edge_cases 
+        tests/battle/test_battle_edge_cases.py::test_initiative_edge_casesPASSED
+tests/battle/test_battle_rounds.py::test_battle_round_order 
+        SETUP    F monkeypatch
+        SETUP    F mock_inputs (fixtures used: monkeypatch)
+        tests/battle/test_battle_rounds.py::test_battle_round_order (fixtures used: mock_inputs, monkeypatch)Runde: 1
+Player1 (Initiative: 20) ist an der Reihe. Er hat 100 Leben und 0 temporäre HP
+
+Player2 (Initiative: 15) ist an der Reihe. Er hat 100 Leben und 0 temporäre HP
+
+Enemy1 (Initiative: 10) ist an der Reihe. Er hat 100 Leben und 0 temporäre HP
+Aggro: none
+
+Enemy2 (Initiative: 5) ist an der Reihe. Er hat 100 Leben und 0 temporäre HP
+Aggro: none
+
+PASSED
+        TEARDOWN F mock_inputs
+        TEARDOWN F monkeypatch
+tests/battle/test_battle_rounds.py::test_battle_round_state 
+        SETUP    F monkeypatch
+        SETUP    F mock_inputs (fixtures used: monkeypatch)
+        tests/battle/test_battle_rounds.py::test_battle_round_state (fixtures used: mock_inputs, monkeypatch)Runde: 1
+Tank (Initiative: 20) ist an der Reihe. Er hat 200 Leben und 0 temporäre HP
+Tank verursacht 22 Schaden an Enemy.
+Enemy hat jetzt noch 128 Gesundheit und 0 temporäre HP.
+
+Healer (Initiative: 15) ist an der Reihe. Er hat 100 Leben und 0 temporäre HP
+Healer heilt Tank um 0 HP und gibt 0 temporäre HP.
+Tank hat jetzt 200 Gesundheit und 0 temporäre HP.
+
+Enemy (Initiative: 10) ist an der Reihe. Er hat 128 Leben und 0 temporäre HP
+Hohe Aggro auf Enemy: Tank
+Enemy verursacht 20 Schaden an Tank.
+Tank hat jetzt noch 180 Gesundheit und 0 temporäre HP.
+
+PASSED
+        TEARDOWN F mock_inputs
+        TEARDOWN F monkeypatch
+tests/battle/test_battle_rounds.py::test_battle_round_edge_cases 
+        SETUP    F monkeypatch
+        SETUP    F mock_inputs (fixtures used: monkeypatch)
+        tests/battle/test_battle_rounds.py::test_battle_round_edge_cases (fixtures used: mock_inputs, monkeypatch)Runde: 1
+Solo (Initiative: 10) ist an der Reihe. Er hat 100 Leben und 0 temporäre HP
+
+Runde: 1
+Char1 (Initiative: 10) ist an der Reihe. Er hat 100 Leben und 0 temporäre HP
+
+Char2 (Initiative: 10) ist an der Reihe. Er hat 100 Leben und 0 temporäre HP
+
+Char3 (Initiative: 10) ist an der Reihe. Er hat 100 Leben und 0 temporäre HP
+Aggro: none
+
+PASSED
+        TEARDOWN F mock_inputs
+        TEARDOWN F monkeypatch
+tests/battle/test_battle_rounds.py::test_combat_state_transitions 
+        SETUP    F monkeypatch
+        SETUP    F mock_inputs (fixtures used: monkeypatch)
+        tests/battle/test_battle_rounds.py::test_combat_state_transitions (fixtures used: mock_inputs, monkeypatch)Runde: 1
+Player (Initiative: 15) ist an der Reihe. Er hat 100 Leben und 0 temporäre HP
+Player verursacht 32 Schaden an Enemy.
+Enemy hat jetzt noch 18 Gesundheit und 0 temporäre HP.
+
+Enemy (Initiative: 10) ist an der Reihe. Er hat 18 Leben und 0 temporäre HP
+Hohe Aggro auf Enemy: Player
+
+PASSED
+        TEARDOWN F mock_inputs
+        TEARDOWN F monkeypatch
+tests/battle/test_flow.py::test_initiative_order 
+        tests/battle/test_flow.py::test_initiative_orderPASSED
+tests/battle/test_flow.py::test_round_management 
+        tests/battle/test_flow.py::test_round_managementPASSED
+tests/battle/test_flow.py::test_turn_sequence 
+        tests/battle/test_flow.py::test_turn_sequencePASSED
+tests/battle/test_state.py::test_combat_state_transitions 
+        tests/battle/test_state.py::test_combat_state_transitionsPASSED
+tests/battle/test_state.py::test_dead_character_state 
+        tests/battle/test_state.py::test_dead_character_statePASSED
+tests/battle/test_state.py::test_aggro_state 
+        tests/battle/test_state.py::test_aggro_statePASSED
+tests/battle/test_targeting.py::test_basic_targeting 
+        tests/battle/test_targeting.py::test_basic_targetingPASSED
+tests/battle/test_targeting.py::test_aggro_targeting 
+        tests/battle/test_targeting.py::test_aggro_targetingPASSED
+tests/battle/test_targeting.py::test_targeting_restrictions 
+        tests/battle/test_targeting.py::test_targeting_restrictionsPASSED
+tests/battle/test_targeting.py::test_empty_aggro 
+        tests/battle/test_targeting.py::test_empty_aggroPASSED
+tests/character/test_character_validation.py::test_character_creation_validation 
+        tests/character/test_character_validation.py::test_character_creation_validationPASSED
+tests/character/test_character_validation.py::test_stat_modification_validation 
+        tests/character/test_character_validation.py::test_stat_modification_validationPASSED
+tests/character/test_character_validation.py::test_state_validation 
+        tests/character/test_character_validation.py::test_state_validationPASSED
+tests/character/test_character_validation.py::test_tag_system_validation 
+        tests/character/test_character_validation.py::test_tag_system_validationPASSED
+tests/character/test_creation.py::test_basic_character_creation 
+        tests/character/test_creation.py::test_basic_character_creationPASSED
+tests/character/test_creation.py::test_character_creation_enemy 
+        tests/character/test_creation.py::test_character_creation_enemyPASSED
+tests/character/test_creation.py::test_character_creation_numeric_inputs 
+        tests/character/test_creation.py::test_character_creation_numeric_inputsPASSED
+tests/character/test_health.py::test_health_range_validation 
+        tests/character/test_health.py::test_health_range_validationPASSED
+tests/character/test_health.py::test_health_state_consistency 
+        tests/character/test_health.py::test_health_state_consistencyPASSED
+tests/character/test_health.py::test_death_state 
+        tests/character/test_health.py::test_death_statePASSED
+tests/character/test_interactions.py::test_cross_character_effects 
+        tests/character/test_interactions.py::test_cross_character_effectsPASSED
+tests/character/test_interactions.py::test_shared_state_handling 
+        tests/character/test_interactions.py::test_shared_state_handlingPASSED
+tests/character/test_interactions.py::test_team_based_interactions 
+        tests/character/test_interactions.py::test_team_based_interactionsPASSED
+tests/character/test_interactions.py::test_reference_handling 
+        tests/character/test_interactions.py::test_reference_handlingPASSED
+tests/character/test_stats.py::test_stat_range_validation 
+        tests/character/test_stats.py::test_stat_range_validationPASSED
+tests/character/test_stats.py::test_stat_type_validation 
+        tests/character/test_stats.py::test_stat_type_validationPASSED
+tests/character/test_stats.py::test_stat_consistency 
+        tests/character/test_stats.py::test_stat_consistencyPASSED
+tests/character/test_temp_hp.py::test_temp_hp_stacking 
+        tests/character/test_temp_hp.py::test_temp_hp_stackingPASSED
+tests/character/test_temp_hp.py::test_temp_hp_damage_absorption 
+        tests/character/test_temp_hp.py::test_temp_hp_damage_absorptionPASSED
+tests/character/test_temp_hp.py::test_temp_hp_damage_types 
+        tests/character/test_temp_hp.py::test_temp_hp_damage_typesPASSED
+tests/character/test_temp_hp.py::test_temp_hp_edge_cases 
+        tests/character/test_temp_hp.py::test_temp_hp_edge_casesPASSED
+tests/combat/test_combat_edge_cases.py::test_resistance_edge_cases 
+        tests/combat/test_combat_edge_cases.py::test_resistance_edge_casesPASSED
+tests/combat/test_combat_edge_cases.py::test_damage_type_validation 
+        tests/combat/test_combat_edge_cases.py::test_damage_type_validationPASSED
+tests/combat/test_combat_edge_cases.py::test_healing_edge_cases 
+        tests/combat/test_combat_edge_cases.py::test_healing_edge_casesPASSED
+tests/combat/test_combat_edge_cases.py::test_damage_calculation_error_handling 
+        tests/combat/test_combat_edge_cases.py::test_damage_calculation_error_handlingPASSED
+tests/combat/test_combinations.py::test_damage_type_combinations 
+        tests/combat/test_combinations.py::test_damage_type_combinationsPASSED
+tests/combat/test_combinations.py::test_healing_type_combinations 
+        tests/combat/test_combinations.py::test_healing_type_combinationsPASSED
+tests/combat/test_combinations.py::test_resistance_combinations 
+        tests/combat/test_combinations.py::test_resistance_combinationsPASSED
+tests/combat/test_combinations.py::test_edge_case_combinations 
+        tests/combat/test_combinations.py::test_edge_case_combinationsPASSED
+tests/combat/test_damage.py::test_damage_calculation 
+        tests/combat/test_damage.py::test_damage_calculationPASSED
+tests/combat/test_damage.py::test_damage_resistance 
+        tests/combat/test_damage.py::test_damage_resistancePASSED
+tests/combat/test_damage.py::test_damage_edge_cases 
+        tests/combat/test_damage.py::test_damage_edge_casesPASSED
+tests/combat/test_damage.py::test_generate_aggro_damage 
+        tests/combat/test_damage.py::test_generate_aggro_damagePASSED
+tests/combat/test_healing.py::test_healing_calculation 
+        tests/combat/test_healing.py::test_healing_calculationPASSED
+tests/combat/test_healing.py::test_temp_healing 
+        tests/combat/test_healing.py::test_temp_healingPASSED
+tests/combat/test_healing.py::test_healing_edge_cases 
+        tests/combat/test_healing.py::test_healing_edge_casesPASSED
+tests/input/test_input_validation.py::test_damage_input_edge_cases 
+        tests/input/test_input_validation.py::test_damage_input_edge_casesPASSED
+tests/input/test_input_validation.py::test_healing_input_edge_cases 
+        tests/input/test_input_validation.py::test_healing_input_edge_casesPASSED
+tests/input/test_input_validation.py::test_input_retry_mechanism 
+        tests/input/test_input_validation.py::test_input_retry_mechanismPASSED
+tests/input/test_parsing.py::test_damage_input_parsing 
+        tests/input/test_parsing.py::test_damage_input_parsingPASSED
+tests/input/test_parsing.py::test_healing_input_parsing 
+        tests/input/test_parsing.py::test_healing_input_parsingPASSED
+tests/input/test_parsing.py::test_input_edge_cases 
+        tests/input/test_parsing.py::test_input_edge_casesPASSED
+
+============================== slowest durations ==============================
+0.00s call     tests/test_integration.py::test_full_combat_round
+0.00s teardown tests/battle/test_battle_rounds.py::test_battle_round_state
+0.00s setup    tests/battle/test_battle_edge_cases.py::test_round_state_persistence
+0.00s setup    tests/battle/test_battle_rounds.py::test_battle_round_edge_cases
+0.00s setup    tests/battle/test_battle_rounds.py::test_battle_round_order
+0.00s call     tests/combat/test_combinations.py::test_healing_type_combinations
+0.00s setup    tests/battle/test_battle_rounds.py::test_battle_round_state
+0.00s setup    tests/battle/test_battle_rounds.py::test_combat_state_transitions
+0.00s call     tests/input/test_input_validation.py::test_damage_input_edge_cases
+0.00s setup    tests/test_integration.py::test_full_combat_round
+0.00s setup    tests/combat/test_combinations.py::test_resistance_combinations
+0.00s call     tests/battle/test_battle_rounds.py::test_battle_round_state
+0.00s call     tests/test_integration.py::test_combat_state_management
+0.00s teardown tests/battle/test_battle_edge_cases.py::test_round_state_persistence
+0.00s call     tests/combat/test_damage.py::test_generate_aggro_damage
+0.00s teardown tests/battle/test_battle_rounds.py::test_battle_round_edge_cases
+0.00s call     tests/battle/test_battle_edge_cases.py::test_round_state_persistence
+0.00s teardown tests/battle/test_battle_rounds.py::test_battle_round_order
+0.00s teardown tests/test_integration.py::test_full_combat_round
+0.00s call     tests/battle/test_battle_rounds.py::test_battle_round_edge_cases
+0.00s call     tests/battle/test_battle_rounds.py::test_battle_round_order
+0.00s setup    tests/test_integration.py::test_combat_state_management
+0.00s call     tests/battle/test_battle_rounds.py::test_combat_state_transitions
+0.00s call     tests/combat/test_combinations.py::test_resistance_combinations
+0.00s teardown tests/battle/test_battle_rounds.py::test_combat_state_transitions
+0.00s call     tests/battle/test_battle_edge_cases.py::test_dead_character_interactions
+0.00s call     tests/combat/test_damage.py::test_damage_edge_cases
+0.00s call     tests/input/test_input_validation.py::test_healing_input_edge_cases
+0.00s call     tests/test_integration.py::test_input_parsing
+0.00s setup    tests/combat/test_damage.py::test_generate_aggro_damage
+0.00s setup    tests/combat/test_damage.py::test_damage_edge_cases
+0.00s teardown tests/combat/test_damage.py::test_generate_aggro_damage
+0.00s call     tests/character/test_interactions.py::test_cross_character_effects
+0.00s teardown tests/combat/test_damage.py::test_damage_edge_cases
+0.00s call     tests/combat/test_combinations.py::test_damage_type_combinations
+0.00s call     tests/battle/test_battle_edge_cases.py::test_initiative_edge_cases
+0.00s call     tests/combat/test_combinations.py::test_edge_case_combinations
+0.00s setup    tests/battle/test_battle_edge_cases.py::test_dead_character_interactions
+0.00s call     tests/input/test_parsing.py::test_damage_input_parsing
+0.00s call     tests/character/test_health.py::test_health_range_validation
+0.00s call     tests/combat/test_healing.py::test_healing_calculation
+0.00s call     tests/character/test_health.py::test_death_state
+0.00s setup    tests/battle/test_flow.py::test_initiative_order
+0.00s call     tests/character/test_interactions.py::test_shared_state_handling
+0.00s call     tests/input/test_parsing.py::test_input_edge_cases
+0.00s call     tests/combat/test_damage.py::test_damage_calculation
+0.00s setup    tests/combat/test_damage.py::test_damage_calculation
+0.00s call     tests/battle/test_flow.py::test_turn_sequence
+0.00s call     tests/battle/test_flow.py::test_initiative_order
+0.00s setup    tests/combat/test_combinations.py::test_edge_case_combinations
+0.00s call     tests/combat/test_combat_edge_cases.py::test_damage_calculation_error_handling
+0.00s call     tests/character/test_interactions.py::test_team_based_interactions
+0.00s call     tests/battle/test_state.py::test_combat_state_transitions
+0.00s call     tests/character/test_temp_hp.py::test_temp_hp_edge_cases
+0.00s call     tests/battle/test_targeting.py::test_empty_aggro
+0.00s call     tests/combat/test_combat_edge_cases.py::test_damage_type_validation
+0.00s call     tests/combat/test_damage.py::test_damage_resistance
+0.00s setup    tests/test_integration.py::test_input_parsing
+0.00s call     tests/battle/test_targeting.py::test_targeting_restrictions
+0.00s call     tests/character/test_creation.py::test_character_creation_numeric_inputs
+0.00s setup    tests/combat/test_healing.py::test_healing_calculation
+0.00s setup    tests/combat/test_combinations.py::test_damage_type_combinations
+0.00s call     tests/input/test_parsing.py::test_healing_input_parsing
+0.00s call     tests/combat/test_combat_edge_cases.py::test_resistance_edge_cases
+0.00s call     tests/character/test_temp_hp.py::test_temp_hp_stacking
+0.00s call     tests/character/test_stats.py::test_stat_type_validation
+0.00s call     tests/character/test_temp_hp.py::test_temp_hp_damage_absorption
+0.00s call     tests/battle/test_state.py::test_aggro_state
+0.00s call     tests/battle/test_targeting.py::test_aggro_targeting
+0.00s setup    tests/character/test_health.py::test_health_range_validation
+0.00s setup    tests/battle/test_battle_edge_cases.py::test_initiative_edge_cases
+0.00s call     tests/character/test_character_validation.py::test_character_creation_validation
+0.00s setup    tests/battle/test_state.py::test_combat_state_transitions
+0.00s call     tests/battle/test_targeting.py::test_basic_targeting
+0.00s call     tests/battle/test_state.py::test_dead_character_state
+0.00s call     tests/character/test_stats.py::test_stat_range_validation
+0.00s call     tests/combat/test_combat_edge_cases.py::test_healing_edge_cases
+0.00s call     tests/combat/test_healing.py::test_temp_healing
+0.00s teardown tests/test_integration.py::test_combat_state_management
+0.00s call     tests/character/test_temp_hp.py::test_temp_hp_damage_types
+0.00s call     tests/character/test_creation.py::test_basic_character_creation
+0.00s call     tests/character/test_stats.py::test_stat_consistency
+0.00s call     tests/combat/test_healing.py::test_healing_edge_cases
+0.00s setup    tests/combat/test_damage.py::test_damage_resistance
+0.00s setup    tests/character/test_health.py::test_health_state_consistency
+0.00s setup    tests/battle/test_targeting.py::test_basic_targeting
+0.00s setup    tests/character/test_stats.py::test_stat_range_validation
+0.00s call     tests/character/test_character_validation.py::test_state_validation
+0.00s call     tests/character/test_creation.py::test_character_creation_enemy
+0.00s call     tests/battle/test_flow.py::test_round_management
+0.00s call     tests/input/test_input_validation.py::test_input_retry_mechanism
+0.00s call     tests/character/test_health.py::test_health_state_consistency
+0.00s setup    tests/input/test_input_validation.py::test_damage_input_edge_cases
+0.00s call     tests/character/test_character_validation.py::test_tag_system_validation
+0.00s teardown tests/test_integration.py::test_input_parsing
+0.00s teardown tests/character/test_health.py::test_health_range_validation
+0.00s setup    tests/character/test_temp_hp.py::test_temp_hp_edge_cases
+0.00s teardown tests/combat/test_combinations.py::test_resistance_combinations
+0.00s setup    tests/character/test_creation.py::test_basic_character_creation
+0.00s setup    tests/input/test_input_validation.py::test_input_retry_mechanism
+0.00s setup    tests/input/test_parsing.py::test_damage_input_parsing
+0.00s teardown tests/battle/test_battle_edge_cases.py::test_dead_character_interactions
+0.00s setup    tests/character/test_interactions.py::test_cross_character_effects
+0.00s call     tests/character/test_interactions.py::test_reference_handling
+0.00s setup    tests/combat/test_combat_edge_cases.py::test_resistance_edge_cases
+0.00s call     tests/character/test_character_validation.py::test_stat_modification_validation
+0.00s setup    tests/character/test_character_validation.py::test_character_creation_validation
+0.00s teardown tests/battle/test_battle_edge_cases.py::test_initiative_edge_cases
+0.00s setup    tests/character/test_creation.py::test_character_creation_numeric_inputs
+0.00s setup    tests/battle/test_flow.py::test_round_management
+0.00s setup    tests/character/test_temp_hp.py::test_temp_hp_stacking
+0.00s setup    tests/character/test_interactions.py::test_shared_state_handling
+0.00s setup    tests/combat/test_healing.py::test_temp_healing
+0.00s setup    tests/input/test_input_validation.py::test_healing_input_edge_cases
+0.00s setup    tests/character/test_health.py::test_death_state
+0.00s setup    tests/character/test_character_validation.py::test_state_validation
+0.00s teardown tests/character/test_creation.py::test_character_creation_numeric_inputs
+0.00s setup    tests/combat/test_combat_edge_cases.py::test_healing_edge_cases
+0.00s setup    tests/battle/test_targeting.py::test_empty_aggro
+0.00s setup    tests/character/test_interactions.py::test_team_based_interactions
+0.00s teardown tests/combat/test_combinations.py::test_damage_type_combinations
+0.00s teardown tests/combat/test_healing.py::test_healing_calculation
+0.00s teardown tests/input/test_input_validation.py::test_damage_input_edge_cases
+0.00s setup    tests/character/test_stats.py::test_stat_consistency
+0.00s teardown tests/combat/test_damage.py::test_damage_calculation
+0.00s setup    tests/combat/test_combinations.py::test_healing_type_combinations
+0.00s teardown tests/combat/test_combinations.py::test_edge_case_combinations
+0.00s teardown tests/character/test_interactions.py::test_cross_character_effects
+0.00s teardown tests/combat/test_healing.py::test_healing_edge_cases
+0.00s teardown tests/input/test_input_validation.py::test_input_retry_mechanism
+0.00s setup    tests/combat/test_combat_edge_cases.py::test_damage_calculation_error_handling
+0.00s setup    tests/battle/test_state.py::test_dead_character_state
+0.00s setup    tests/character/test_character_validation.py::test_stat_modification_validation
+0.00s setup    tests/battle/test_flow.py::test_turn_sequence
+0.00s teardown tests/combat/test_combinations.py::test_healing_type_combinations
+0.00s teardown tests/character/test_health.py::test_death_state
+0.00s setup    tests/character/test_stats.py::test_stat_type_validation
+0.00s setup    tests/combat/test_healing.py::test_healing_edge_cases
+0.00s teardown tests/combat/test_combat_edge_cases.py::test_damage_type_validation
+0.00s setup    tests/character/test_temp_hp.py::test_temp_hp_damage_absorption
+0.00s setup    tests/battle/test_targeting.py::test_aggro_targeting
+0.00s teardown tests/character/test_character_validation.py::test_character_creation_validation
+0.00s setup    tests/input/test_parsing.py::test_healing_input_parsing
+0.00s setup    tests/character/test_creation.py::test_character_creation_enemy
+0.00s teardown tests/battle/test_flow.py::test_initiative_order
+0.00s setup    tests/character/test_interactions.py::test_reference_handling
+0.00s teardown tests/character/test_temp_hp.py::test_temp_hp_edge_cases
+0.00s setup    tests/battle/test_state.py::test_aggro_state
+0.00s setup    tests/combat/test_combat_edge_cases.py::test_damage_type_validation
+0.00s teardown tests/battle/test_flow.py::test_round_management
+0.00s setup    tests/character/test_character_validation.py::test_tag_system_validation
+0.00s teardown tests/input/test_parsing.py::test_input_edge_cases
+0.00s setup    tests/input/test_parsing.py::test_input_edge_cases
+0.00s teardown tests/battle/test_state.py::test_combat_state_transitions
+0.00s teardown tests/character/test_interactions.py::test_shared_state_handling
+0.00s teardown tests/battle/test_targeting.py::test_aggro_targeting
+0.00s teardown tests/input/test_input_validation.py::test_healing_input_edge_cases
+0.00s teardown tests/battle/test_flow.py::test_turn_sequence
+0.00s teardown tests/character/test_interactions.py::test_team_based_interactions
+0.00s setup    tests/character/test_temp_hp.py::test_temp_hp_damage_types
+0.00s teardown tests/character/test_stats.py::test_stat_range_validation
+0.00s teardown tests/combat/test_healing.py::test_temp_healing
+0.00s teardown tests/battle/test_targeting.py::test_targeting_restrictions
+0.00s teardown tests/combat/test_damage.py::test_damage_resistance
+0.00s teardown tests/battle/test_state.py::test_dead_character_state
+0.00s teardown tests/battle/test_state.py::test_aggro_state
+0.00s teardown tests/character/test_character_validation.py::test_tag_system_validation
+0.00s teardown tests/character/test_creation.py::test_basic_character_creation
+0.00s teardown tests/input/test_parsing.py::test_damage_input_parsing
+0.00s teardown tests/character/test_character_validation.py::test_state_validation
+0.00s teardown tests/battle/test_targeting.py::test_basic_targeting
+0.00s teardown tests/combat/test_combat_edge_cases.py::test_damage_calculation_error_handling
+0.00s teardown tests/combat/test_combat_edge_cases.py::test_healing_edge_cases
+0.00s teardown tests/character/test_creation.py::test_character_creation_enemy
+0.00s teardown tests/character/test_stats.py::test_stat_type_validation
+0.00s setup    tests/battle/test_targeting.py::test_targeting_restrictions
+0.00s teardown tests/character/test_interactions.py::test_reference_handling
+0.00s teardown tests/combat/test_combat_edge_cases.py::test_resistance_edge_cases
+0.00s teardown tests/battle/test_targeting.py::test_empty_aggro
+0.00s teardown tests/character/test_health.py::test_health_state_consistency
+0.00s teardown tests/character/test_stats.py::test_stat_consistency
+0.00s teardown tests/character/test_temp_hp.py::test_temp_hp_stacking
+0.00s teardown tests/character/test_temp_hp.py::test_temp_hp_damage_absorption
+0.00s teardown tests/character/test_temp_hp.py::test_temp_hp_damage_types
+0.00s teardown tests/input/test_parsing.py::test_healing_input_parsing
+0.00s teardown tests/character/test_character_validation.py::test_stat_modification_validation
+============================= 62 passed in 0.42s ==============================

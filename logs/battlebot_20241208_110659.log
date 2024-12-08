@@ -1,0 +1,5 @@
+2024-12-08 11:06:59,186 - root - INFO - [logging_config.py:53] - Logging system initialized
+2024-12-08 11:06:59,187 - root - DEBUG - [logging_config.py:54] - Log file created at: logs\battlebot_20241208_110659.log
+2024-12-08 11:06:59,187 - __main__ - INFO - [battle_adapter.py:207] - Starting BattleBot main game loop
+2024-12-08 11:06:59,187 - __main__ - DEBUG - [battle_adapter.py:211] - Loading game state from file
+2024-12-08 11:06:59,188 - __main__ - DEBUG - [battle_adapter.py:214] - Game state loaded: [{'name': 'Test', 'initiative': 10, 'armor': 0, 'arcane_resist': 0, 'light_resist': 0, 'nature_resist': 0, 'health': 80, 'max_health': 100, 'temp_hp': 0, 'tag': 'player'}]

@@ -8,7 +8,7 @@ This module contains tests for:
 
 import pytest
 
-from Battle import Character, battle_round
+from battle_adapter import Character, battle_round
 
 
 class MockInput:

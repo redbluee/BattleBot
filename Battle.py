@@ -1,5 +1,10 @@
 import json
+import logging
 
+from core.logging_config import setup_logging
+
+# Set up module logger
+logger = logging.getLogger(__name__)
 
 class Character:
     def __init__(
@@ -13,6 +18,7 @@ class Character:
         max_health,
         tag,
     ):
+        logger.debug(f"Initializing legacy Character: {name} (tag: {tag})")
         self.name = name
         self.initiative = initiative
         self.armor = armor
@@ -25,15 +31,21 @@ class Character:
         self.tag = tag
         if self.tag == "enemy":
             self.aggro = {}  # Aggro-Werte für jeden Spieler
+        logger.debug(f"Legacy Character {name} initialized with stats: initiative={initiative}, "
+                    f"armor={armor}, resists=[arcane={arcane_resist}, light={light_resist}, "
+                    f"nature={nature_resist}], max_health={max_health}")
 
     def add_aggro(self, player_name, amount, characters):
-        # Assuming 'player_name' refers to a Character object
+        logger.debug(f"Adding aggro for {self.name}: player={player_name}, amount={amount}")
         player = next((p for p in characters if p.name == player_name), None)
         if player and player.tag == "player":
             if player_name in self.aggro:
                 self.aggro[player_name] += amount
             else:
                 self.aggro[player_name] = amount
+            logger.debug(f"New aggro value for {player_name}: {self.aggro[player_name]}")
+        else:
+            logger.warning(f"Failed to add aggro: player {player_name} not found or not a player")
 
     def get_highest_aggro(self):
 
@@ -119,21 +131,61 @@ class Character:
 
 
 def save_game(characters, filename="game_save.txt"):
-    with open(filename, "w") as file:
-        json.dump([char.__dict__ for char in characters], file)
-    print(f"Spielstand wurde in {filename} gespeichert.")
+    """Save game state to file."""
+    logger.info(f"Saving game state to {filename}")
+    try:
+        game_state = {
+            "characters": [
+                {
+                    "name": c.name,
+                    "initiative": c.initiative,
+                    "armor": c.armor,
+                    "arcane_resist": c.arcane_resist,
+                    "light_resist": c.light_resist,
+                    "nature_resist": c.nature_resist,
+                    "max_health": c.max_health,
+                    "tag": c.tag,
+                }
+                for c in characters
+            ]
+        }
+        with open(filename, "w") as f:
+            json.dump(game_state, f, indent=2)
+        logger.debug(f"Game state saved successfully: {len(characters)} characters")
+    except Exception as e:
+        logger.error(f"Failed to save game state: {str(e)}")
+        raise
 
 
 def load_game(filename="game_save.txt"):
+    """Load game state from file."""
+    logger.info(f"Loading game state from {filename}")
     try:
-        with open(filename, "r") as file:
-            characters_data = json.load(file)
-            characters = [Character(**data) for data in characters_data]
-            print(f"Spielstand aus {filename} geladen.")
-            return characters
+        with open(filename, "r") as f:
+            game_state = json.load(f)
+        
+        characters = []
+        for char_data in game_state["characters"]:
+            char = Character(
+                name=char_data["name"],
+                initiative=char_data["initiative"],
+                armor=char_data["armor"],
+                arcane_resist=char_data["arcane_resist"],
+                light_resist=char_data["light_resist"],
+                nature_resist=char_data["nature_resist"],
+                max_health=char_data["max_health"],
+                tag=char_data["tag"],
+            )
+            characters.append(char)
+        
+        logger.debug(f"Game state loaded successfully: {len(characters)} characters")
+        return characters
     except FileNotFoundError:
-        print(f"{filename} nicht gefunden.")
+        logger.warning(f"No save file found at {filename}")
         return []
+    except Exception as e:
+        logger.error(f"Failed to load game state: {str(e)}")
+        raise
 
 
 def show_stats(characters, current_index):
@@ -402,24 +454,30 @@ def battle_round(characters, round_counter):
 
 
 def main():
-    characters = [
-        Character("leh", 24, 10, 0, 0, 10, 80, "player"),
-        Character("val", 23, 0, 10, 30, 10, 80, "player"),
-        Character("zip", 23, 0, 20, 20, 10, 70, "player"),
-        # Character("peo", 19, 30, 0, 0, 10, 140, 'player'),
-        Character("mus", 18, 10, 0, 0, 20, 130, "player"),
-        # Character("q1", 18, 10, 0, 0, 0, 60, 'enemy'),
-        # Character("os", 21, 20, 10, 10, 10, 100, 'enemy'),
-        Character("sr", 20, 10, 0, 0, 30, 120, "enemy"),
-        Character("ss", 20, 10, 0, 0, 30, 120, "enemy"),
-        Character("boss", 23, 20, 0, 0, 30, 400, "enemy"),
-        # Character("shami", 20, 10, 0, 0, 20, 100, 'enemy'),
-        # Character("over", 18, 40, 10, 10, 10, 120,  'enemy')
-    ]  # initiative, armor, arcane_resist, light_resist, nature_resist, max_health, tag
-    round_counter = 1
-    while True:
-        battle_round(characters, round_counter)
-        round_counter += 1
+    """Main game loop."""
+    # Initialize logging
+    setup_logging()
+    logger.info("Starting BattleBot legacy system")
+    
+    try:
+        characters = load_game()
+        if not characters:
+            logger.info("No saved game found, starting fresh")
+        else:
+            logger.info(f"Loaded {len(characters)} characters from save")
+        
+        round_counter = 1
+        
+        while True:
+            logger.debug(f"Starting round {round_counter}")
+            if not battle_round(characters, round_counter):
+                logger.info("Battle ended")
+                break
+            round_counter += 1
+            
+    except Exception as e:
+        logger.error(f"Unexpected error in main loop: {str(e)}", exc_info=True)
+        raise
 
 
 if __name__ == "__main__":

@@ -1,0 +1,6 @@
+2024-12-08 11:27:23,006 - root - INFO - [logging_config.py:53] - Logging system initialized
+2024-12-08 11:27:23,006 - root - DEBUG - [logging_config.py:54] - Log file created at: logs\battlebot_20241208_112723.log
+2024-12-08 11:27:23,006 - __main__ - INFO - [battle_adapter.py:218] - Starting BattleBot main game loop
+2024-12-08 11:27:23,006 - __main__ - DEBUG - [battle_adapter.py:220] - Initializing game state: {'round': 1}
+2024-12-08 11:28:37,048 - __main__ - DEBUG - [battle_adapter.py:41] - Creating new Character: p1 (tag: player)
+2024-12-08 11:28:37,049 - __main__ - DEBUG - [battle_adapter.py:52] - Character p1 created with stats: initiative=10, armor=10, resists=[arcane=10, light=10, nature=10], max_health=100

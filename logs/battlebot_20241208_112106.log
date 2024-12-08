@@ -1,0 +1,13 @@
+2024-12-08 11:21:06,958 - root - INFO - [logging_config.py:53] - Logging system initialized
+2024-12-08 11:21:06,958 - root - DEBUG - [logging_config.py:54] - Log file created at: logs\battlebot_20241208_112106.log
+2024-12-08 11:21:06,958 - __main__ - INFO - [battle_adapter.py:218] - Starting BattleBot main game loop
+2024-12-08 11:21:06,960 - __main__ - DEBUG - [battle_adapter.py:220] - Initializing game state: {'round': 1}
+2024-12-08 11:21:19,758 - __main__ - DEBUG - [battle_adapter.py:41] - Creating new Character: p1 (tag: player)
+2024-12-08 11:21:19,759 - __main__ - DEBUG - [battle_adapter.py:52] - Character p1 created with stats: initiative=10, armor=10, resists=[arcane=10, light=10, nature=10], max_health=100
+2024-12-08 11:21:32,834 - __main__ - DEBUG - [battle_adapter.py:41] - Creating new Character: e1 (tag: enemy)
+2024-12-08 11:21:32,835 - __main__ - DEBUG - [battle_adapter.py:52] - Character e1 created with stats: initiative=5, armor=5, resists=[arcane=5, light=5, nature=5], max_health=200
+2024-12-08 11:21:36,329 - __main__ - INFO - [battle_adapter.py:154] - Starting battle round 1
+2024-12-08 11:21:36,329 - __main__ - DEBUG - [battle_adapter.py:155] - Characters in round: ['p1', 'e1']
+2024-12-08 11:21:36,329 - __main__ - DEBUG - [battle_adapter.py:162] - Creating battle with ID: 0651e3cf-9f4b-4a69-aaf8-1699fc1ac633
+2024-12-08 11:21:36,330 - core.aggregates.battle - DEBUG - [battle.py:41] - Created new BattleAggregate with ID: 0651e3cf-9f4b-4a69-aaf8-1699fc1ac633
+2024-12-08 11:21:36,330 - __main__ - INFO - [battle_adapter.py:167] - Initializing new battle

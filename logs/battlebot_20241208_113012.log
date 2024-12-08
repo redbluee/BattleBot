@@ -1,0 +1,4 @@
+2024-12-08 11:30:12,530 - root - INFO - [logging_config.py:53] - Logging system initialized
+2024-12-08 11:30:12,530 - root - DEBUG - [logging_config.py:54] - Log file created at: logs\battlebot_20241208_113012.log
+2024-12-08 11:30:12,530 - __main__ - INFO - [battle_adapter.py:218] - Starting BattleBot main game loop
+2024-12-08 11:30:12,530 - __main__ - DEBUG - [battle_adapter.py:220] - Initializing game state: {'round': 1}
